@@ -590,6 +590,8 @@ public class MainActivity extends WebViewExtActivity implements View.OnTouchList
             applyThemeColor(UiUtils.getColor(favicon, mWebView.isIncognito(), nightMode));
         }
 
+        setFavicon();
+
         if (!favicon.isRecycled()) {
             favicon.recycle();
         }
@@ -646,6 +648,16 @@ public class MainActivity extends WebViewExtActivity implements View.OnTouchList
         }
         return ContextCompat.getColor(this,
                 mWebView.isIncognito() ? R.color.colorIncognito : R.color.colorPrimary);
+    }
+
+    public void setFavicon() {
+        ImageView mFavicon = (ImageView) findViewById(R.id.favicon);
+        if (mUrlIcon == null || mUrlIcon.isRecycled()) {
+            mFavicon.setVisibility(View.GONE);
+            return;
+        }
+        mFavicon.setVisibility(View.VISIBLE);
+        mFavicon.setImageBitmap(mUrlIcon);
     }
 
     private void addShortcut() {
